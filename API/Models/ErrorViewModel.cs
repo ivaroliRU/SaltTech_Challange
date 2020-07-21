@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Models
+namespace SaltTechStore.Models
 {
     public class ErrorViewModel
     {
