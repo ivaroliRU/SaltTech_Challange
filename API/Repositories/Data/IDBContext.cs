@@ -2,11 +2,12 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using SaltTechStore.Models.EntityModels;
+using System.Linq;
 
 namespace SaltTechStore.Repositories.Data
 {
     public interface IDBContext
     {
-        List<Product> Products{get;}
+        IEnumerable<Product> Products{get;}
     }
 }

@@ -21,9 +21,17 @@ namespace SaltTechStore.Controllers
         // GET api/products/
         // Returns all products in the system
         [HttpGet("")]
-        public ActionResult<List<ProductDto>> GetAllProducts()
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
             return Ok(this._productsService.GetAllProducts());
+        }
+
+        // GET api/products/
+        // Returns profduct from the system given an id
+        [HttpGet("{productId}")]
+        public ActionResult<ProductDto> GetProduct(int productId)
+        {
+            return this._productsService.GetProduct(productId);
         }
     }
 }

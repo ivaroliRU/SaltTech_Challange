@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SaltTechStore.Services.Implementation;
 using SaltTechStore.Services.Interfaces;
+using SaltTechStore.Repositories.Implementation;
+using SaltTechStore.Repositories.Interfaces;
+using SaltTechStore.Repositories.Data;
 
 namespace API
 {
@@ -28,6 +31,9 @@ namespace API
             services.AddControllersWithViews();
 
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IProductsRepository, ProductsRepository>();
+
+            services.AddSingleton<IDBContext, DBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
