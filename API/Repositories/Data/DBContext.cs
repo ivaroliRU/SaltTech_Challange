@@ -17,7 +17,7 @@ namespace SaltTechStore.Repositories.Data
         {
             get 
             {
-                return newItemAuthorsList;
+                return products;
             }
         }
     }
