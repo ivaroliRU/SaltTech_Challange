@@ -8,5 +8,8 @@ namespace SaltTechStore.Services.Interfaces
 {
     public interface IOrdersService
     {
+        IEnumerable<OrderDto> GetAllOrders();
+
+        OrderDto GetOrder(int id);
     }
 }

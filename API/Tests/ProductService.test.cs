@@ -33,7 +33,7 @@ namespace SaltTechStore.Tests.Services
         public void ProductService_IsTheCorrectProductThere()
         {
             var result = productsService.GetProduct(1);
-            Assert.True(result.Id == 1, "Return id should be 3");
+            Assert.True(result.Id == 1, "Return id should be 1");
         }
     }
 }

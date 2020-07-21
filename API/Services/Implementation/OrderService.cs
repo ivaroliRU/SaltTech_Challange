@@ -15,5 +15,15 @@ namespace SaltTechStore.Services.Implementation
         public OrdersService(IOrdersRepository ordersRepository){
             this.ordersRepository = ordersRepository;
         }
+
+        //get all orders in the system
+        public IEnumerable<OrderDto> GetAllOrders(){
+            return this.ordersRepository.GetAllOrders();
+        }
+        
+        //get order from the system given an ID
+        public OrderDto GetOrder(int id){
+            return this.ordersRepository.GetOrder(id);
+        }
     }
 }

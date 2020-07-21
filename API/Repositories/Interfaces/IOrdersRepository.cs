@@ -8,5 +8,8 @@ namespace SaltTechStore.Repositories.Interfaces
 {
     public interface IOrdersRepository
     {
+        IEnumerable<OrderDto> GetAllOrders();
+
+        OrderDto GetOrder(int id);
     }
 }

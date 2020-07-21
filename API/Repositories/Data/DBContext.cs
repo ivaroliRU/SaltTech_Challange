@@ -17,7 +17,7 @@ namespace SaltTechStore.Repositories.Data
                 stock = 1
             },
             new Product{
-                Id = 3,
+                Id = 2,
                 Name = "Test Product 2",
                 ImageSource = "adsf",
                 price = 1,
@@ -32,11 +32,30 @@ namespace SaltTechStore.Repositories.Data
             }
         };
 
+        private static List<Order> orders = new List<Order>{
+            new Order{
+                Id = 1,
+                ProductId = 1
+            },
+            new Order{
+                Id = 2,
+                ProductId = 2
+            }
+        };
+
         public IEnumerable<Product> Products
         {
             get 
             {
                 return products;
+            }
+        }
+
+        public IEnumerable<Order> Orders
+        {
+            get 
+            {
+                return orders;
             }
         }
     }

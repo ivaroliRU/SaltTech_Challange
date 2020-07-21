@@ -20,5 +20,20 @@ namespace SaltTechStore.Tests.Services
             IOrdersRepository ordersRepository = new OrdersRepository(dbContext);
             ordersService = new OrdersService(ordersRepository);
         }
+
+        [Fact]
+        public void OrderService_AreAllOrdersThere()
+        {
+            List<OrderDto> result = ordersService.GetAllOrders().ToList();
+
+            Assert.True(result.Count() == 2, "Return length should be 2");
+        }
+
+        [Fact]
+        public void OrderService_IsTheCorrectOrderThere()
+        {
+            var result = ordersService.GetOrder(1);
+            Assert.True(result.Id == 1, "Return id should be 1");
+        }
     }
 }

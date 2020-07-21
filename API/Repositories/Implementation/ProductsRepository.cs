@@ -19,10 +19,10 @@ namespace SaltTechStore.Repositories.Implementation
         }
 
         public IEnumerable<ProductDto> GetAllProducts(){
-            return this.dbContext.Products.Select(c => new ProductDto
+            return this.dbContext.Products.Select(p => new ProductDto
             {
-                Id = c.Id,
-                Name = c.Name
+                Id = p.Id,
+                Name = p.Name
             });
         }
 

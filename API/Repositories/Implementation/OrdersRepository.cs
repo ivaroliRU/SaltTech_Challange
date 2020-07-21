@@ -17,5 +17,25 @@ namespace SaltTechStore.Repositories.Implementation
         {
             this.dbContext = dbContext;
         }
+
+        public IEnumerable<OrderDto> GetAllOrders(){
+            return this.dbContext.Orders.Select(o => new OrderDto
+            {
+                Id = o.Id,
+                ProductId = o.ProductId
+            });
+        }
+
+        public OrderDto GetOrder(int id){
+            var orders = (from o in this.dbContext.Orders
+                        where o.Id == id
+                        select new OrderDto
+                        {
+                            Id = o.Id,
+                            ProductId = o.ProductId
+                        }).FirstOrDefault();
+
+            return orders;
+        }
     }
 }

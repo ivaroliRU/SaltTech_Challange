@@ -9,5 +9,7 @@ namespace SaltTechStore.Repositories.Data
     public interface IDBContext
     {
         IEnumerable<Product> Products{get;}
+
+        IEnumerable<Order> Orders{get;}
     }
 }
