@@ -8,7 +8,7 @@ namespace SaltTechStore.Repositories.Interfaces
 {
     public interface IProductsRepository
     {
-        IEnumerable<ProductDto> GetAllProducts();
+        IEnumerable<ProductDto> GetAllProducts(string name);
 
         ProductDto GetProduct(int id);
 

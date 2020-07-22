@@ -8,7 +8,7 @@ namespace SaltTechStore.Services.Interfaces
 {
     public interface IProductsService
     {
-        IEnumerable<ProductDto> GetAllProducts(int page, int pageSize);
+        IEnumerable<ProductDto> GetAllProducts(int page, int pageSize, string name);
 
         ProductDto GetProduct(int id);
 

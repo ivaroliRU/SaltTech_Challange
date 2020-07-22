@@ -19,14 +19,14 @@ namespace SaltTechStore.Repositories.Implementation
         }
 
         //get all products in the system
-        public IEnumerable<ProductDto> GetAllProducts(){
+        public IEnumerable<ProductDto> GetAllProducts(string name){
             return this.dbContext.Products.Select(p => new ProductDto
             {
                 Id = p.Id,
                 Name = p.Name,
                 ImageSource = p.ImageSource,
                 price = p.price
-            });
+            }).Where(s => s.Name.Contains(name));
         }
 
         //get a specific order given an ID

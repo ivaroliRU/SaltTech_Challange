@@ -21,9 +21,11 @@ namespace SaltTechStore.Controllers
         // GET api/products/
         // Returns all products in the system using paging
         [HttpGet("")]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts([FromQuery(Name = "page")] int page = 0, [FromQuery(Name = "page_size")] int pageSize = 10)
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts([FromQuery(Name = "page")] int page = 0, 
+                                                                    [FromQuery(Name = "page_size")] int pageSize = 10,
+                                                                    [FromQuery(Name = "name")] string name = "")
         {
-            return Ok(this.productsService.GetAllProducts(page, pageSize));
+            return Ok(this.productsService.GetAllProducts(page, pageSize, name));
         }
 
         // GET api/products/{productId}
