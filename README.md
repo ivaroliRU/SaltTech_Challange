@@ -5,7 +5,9 @@ A tech challenge proposed by SaltPay, it invloves  creating a functional ECommer
 
 I chose to run the fontend seperatly from the backend on the react development server, instead of serving it using .Net core, even though it is easily doable. Mainly because I know from experience it could take some time to create a static version of the site that can be served.
 
-For the database I chose to use MySQL hosted on a small server that I was already renting from digital ocean.
+For the database I chose to use MySQL hosted on a small server that I was already renting from digital ocean. I also used a tool that changes CSV files into SQL tables and insert statements, and used the CSV file in the challenge repo as a base for the DB.
+
+My solutions to this challenge was developed using the VS Code IDE on a Linux (Ubuntu) machine.
 
 ## Depenencies
  - .Net Core (Version 3.0^)
