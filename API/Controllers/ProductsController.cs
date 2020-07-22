@@ -19,11 +19,11 @@ namespace SaltTechStore.Controllers
         }
 
         // GET api/products/
-        // Returns all products in the system
+        // Returns all products in the system using paging
         [HttpGet("")]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts([FromQuery(Name = "page")] int page = 0, [FromQuery(Name = "page_size")] int pageSize = 10)
         {
-            return Ok(this.productsService.GetAllProducts());
+            return Ok(this.productsService.GetAllProducts(page, pageSize));
         }
 
         // GET api/products/{productId}
@@ -53,6 +53,21 @@ namespace SaltTechStore.Controllers
             }
             else{
                 return Ok(orders);
+            }
+        }
+
+        // Post api/products/{productId}/orders
+        // Creates an order for a product given a product ID
+        [HttpPost("{productId}/orders")]
+        public ActionResult<OrderDto> CreateOrder(int productId)
+        {
+            var result = productsService.CreateOrder(productId);
+
+            if(!result){
+                return NotFound();
+            }
+            else{
+                return NoContent();
             }
         }
     }

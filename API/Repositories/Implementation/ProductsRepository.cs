@@ -56,5 +56,28 @@ namespace SaltTechStore.Repositories.Implementation
 
             return orders;
         }
+
+        //create order
+        public bool CreateOrder(int id){
+            var product = (from p in this.dbContext.Products
+                        where p.Id == id
+                        select new ProductDto()
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            ImageSource = p.ImageSource,
+                            price = p.price
+                        }).FirstOrDefault();
+            
+            if(product == null){
+                return false;
+            }
+            else{
+                this.dbContext.Add(new Order{ProductId = id});
+                this.dbContext.SaveChanges();
+
+                return true;
+            }
+        }
     }
 }

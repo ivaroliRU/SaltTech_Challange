@@ -17,8 +17,15 @@ namespace SaltTechStore.Services.Implementation
         }
 
         //get all products in the system
-        public IEnumerable<ProductDto> GetAllProducts(){
-            return this.productsRepository.GetAllProducts();
+        public IEnumerable<ProductDto> GetAllProducts(int page, int pageSize){
+            List<ProductDto> products = this.productsRepository.GetAllProducts().ToList();
+            List<ProductDto> result = new List<ProductDto>();
+
+            for(int i = page*pageSize; i < products.Count() && i < (page+1)*pageSize; i++){
+                result.Add(products.ElementAt(i));
+            }
+
+            return result;
         }
         
         //get product from the system given an ID
@@ -29,6 +36,11 @@ namespace SaltTechStore.Services.Implementation
         //get all orders for a specific product
         public IEnumerable<OrderDto> GetProductOrders(int id){
             return this.productsRepository.GetProductOrders(id);
+        }
+
+        //create order for a specific product
+        public bool CreateOrder(int id){
+            return this.productsRepository.CreateOrder(id);
         }
     }
 }

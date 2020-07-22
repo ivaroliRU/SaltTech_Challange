@@ -46,7 +46,7 @@ namespace SaltTechStore.Tests.Services
         [Fact]
         public void OrderService_AreAllOrdersThere()
         {
-            List<OrderDto> result = ordersService.GetAllOrders().ToList();
+            List<OrderDto> result = ordersService.GetAllOrders(0, 2).ToList();
 
             Assert.True(result.Count() == 2, "Return length should be 2");
         }

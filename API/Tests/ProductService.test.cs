@@ -59,7 +59,7 @@ namespace SaltTechStore.Tests.Services
         [Fact]
         public void ProductService_AreAllProductsThere()
         {
-            List<ProductDto> result = productsService.GetAllProducts().ToList();
+            List<ProductDto> result = productsService.GetAllProducts(0, 10).ToList();
 
             Assert.True(result.Count() == 3, "Return length should be 3");
         }

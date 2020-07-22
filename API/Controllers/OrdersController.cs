@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SaltTechStore.Services.Interfaces;
 using SaltTechStore.Models.DtoModels;
+using SaltTechStore.Models.InputModels;
 
 namespace SaltTechStore.Controllers
 {
@@ -21,9 +22,9 @@ namespace SaltTechStore.Controllers
         // GET api/orders/
         // Returns all products in the system
         [HttpGet("")]
-        public ActionResult<IEnumerable<OrderDto>> GetAllOrders()
+        public ActionResult<IEnumerable<OrderDto>> GetAllOrders([FromQuery(Name = "page")] int page = 0, [FromQuery(Name = "page_size")] int pageSize = 10)
         {
-            return Ok(this.ordersService.GetAllOrders());
+            return Ok(this.ordersService.GetAllOrders(page, pageSize));
         }
 
         // GET api/orders/{orderId}
@@ -38,6 +39,20 @@ namespace SaltTechStore.Controllers
             }
             else{
                 return Ok(order);
+            }
+        }
+
+        //create multible orders using the body
+        [HttpPost]
+        public ActionResult<OrderDto> CreateOrders(List<OrderInput> input)
+        {
+            var response = this.ordersService.CreateOrders(input);
+
+            if(!response){
+                return NotFound();
+            }
+            else{
+                return NoContent();
             }
         }
     }
