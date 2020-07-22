@@ -11,11 +11,11 @@ namespace SaltTechStore.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsService _productsService;
+        private readonly IProductsService productsService;
 
-        public ProductsController(IProductsService _productsService)
+        public ProductsController(IProductsService productsService)
         {
-            this._productsService = _productsService;
+            this.productsService = productsService;
         }
 
         // GET api/products/
@@ -23,15 +23,37 @@ namespace SaltTechStore.Controllers
         [HttpGet("")]
         public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
-            return Ok(this._productsService.GetAllProducts());
+            return Ok(this.productsService.GetAllProducts());
         }
 
-        // GET api/products/
+        // GET api/products/{productId}
         // Returns profduct from the system given an id
         [HttpGet("{productId}")]
         public ActionResult<ProductDto> GetProduct(int productId)
         {
-            return this._productsService.GetProduct(productId);
+            var product =  this.productsService.GetProduct(productId);
+
+            if(product == null){
+                return NotFound();
+            }
+            else{
+                return Ok(product);
+            }
+        }
+
+        // GET api/products/{productId}/orders
+        // Returns returns orders for a product given a product ID
+        [HttpGet("{productId}/orders")]
+        public ActionResult<OrderDto> GetProductOrders(int productId)
+        {
+            var orders = productsService.GetProductOrders(productId);
+
+            if(orders == null){
+                return NotFound();
+            }
+            else{
+                return Ok(orders);
+            }
         }
     }
 }

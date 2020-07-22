@@ -11,5 +11,7 @@ namespace SaltTechStore.Repositories.Interfaces
         IEnumerable<ProductDto> GetAllProducts();
 
         ProductDto GetProduct(int id);
+
+        IEnumerable<OrderDto> GetProductOrders(int id);
     }
 }

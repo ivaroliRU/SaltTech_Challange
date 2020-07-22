@@ -18,6 +18,7 @@ namespace SaltTechStore.Repositories.Implementation
             this.dbContext = dbContext;
         }
 
+        //get all products in the system
         public IEnumerable<ProductDto> GetAllProducts(){
             return this.dbContext.Products.Select(p => new ProductDto
             {
@@ -26,6 +27,7 @@ namespace SaltTechStore.Repositories.Implementation
             });
         }
 
+        //get a specific order given an ID
         public ProductDto GetProduct(int id){
             var product = (from p in this.dbContext.Products
                         where p.Id == id
@@ -36,6 +38,19 @@ namespace SaltTechStore.Repositories.Implementation
                         }).FirstOrDefault();
 
             return product;
+        }
+
+        //get all orders for a specific product given an id
+        public IEnumerable<OrderDto> GetProductOrders(int id){
+            var orders = (from o in this.dbContext.Orders
+                        where o.ProductId == id
+                        select new OrderDto()
+                        {
+                            Id = o.Id,
+                            ProductId = o.ProductId
+                        });
+
+            return orders;
         }
     }
 }

@@ -32,6 +32,8 @@ namespace API
 
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IProductsRepository, ProductsRepository>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
 
             services.AddSingleton<IDBContext, DBContext>();
         }

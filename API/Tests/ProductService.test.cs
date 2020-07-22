@@ -35,5 +35,12 @@ namespace SaltTechStore.Tests.Services
             var result = productsService.GetProduct(1);
             Assert.True(result.Id == 1, "Return id should be 1");
         }
+
+        [Fact]
+        public void ProductService_IsTheCorrectOrdersThere()
+        {
+            List<OrderDto> result = productsService.GetProductOrders(1).ToList();
+            Assert.True(result[0].ProductId == 1, "Return id should be 1");
+        }
     }
 }
