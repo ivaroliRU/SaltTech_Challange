@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using SaltTechStore.Services.Implementation;
 using SaltTechStore.Services.Interfaces;
@@ -35,7 +37,13 @@ namespace API
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IOrdersRepository, OrdersRepository>();
 
-            services.AddSingleton<IDBContext, DBContext>();
+            //inject the actual DB context into our application
+            services.AddDbContext<DBContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")
+            ));
+            
+            //allow us to use interface over the dbcontext
+            services.AddScoped<IDBContext, DBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

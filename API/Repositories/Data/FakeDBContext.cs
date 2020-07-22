@@ -1,7 +1,10 @@
-using System;
+/*using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using SaltTechStore.Models.EntityModels;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace SaltTechStore.Repositories.Data
 {
@@ -33,6 +36,7 @@ namespace SaltTechStore.Repositories.Data
             }
         };
 
+        //setup test data for orders service
         private static List<Order> orders = new List<Order>{
             new Order{
                 Id = 1,
@@ -44,20 +48,20 @@ namespace SaltTechStore.Repositories.Data
             }
         };
 
-        public IEnumerable<Product> Products
-        {
+        public DbSet<Product> Products{
             get 
             {
-                return products;
+                return products.AsQueryable().BuildMockDbSet();
             }
         }
 
-        public IEnumerable<Order> Orders
+        public DbSet<Order> Orders{get; set;}
+
+        //so we don't get errors with the IDisposable interface
+        public void Dispose()
         {
-            get 
-            {
-                return orders;
-            }
+            //Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
-}
+}*/

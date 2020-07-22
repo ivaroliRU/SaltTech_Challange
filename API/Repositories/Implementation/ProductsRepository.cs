@@ -11,9 +11,9 @@ namespace SaltTechStore.Repositories.Implementation
 {
     public class ProductsRepository: IProductsRepository
     {
-        private readonly IDBContext dbContext;
+        private readonly DBContext dbContext;
 
-        public ProductsRepository(IDBContext dbContext)
+        public ProductsRepository(DBContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -23,7 +23,9 @@ namespace SaltTechStore.Repositories.Implementation
             return this.dbContext.Products.Select(p => new ProductDto
             {
                 Id = p.Id,
-                Name = p.Name
+                Name = p.Name,
+                ImageSource = p.ImageSource,
+                price = p.price
             });
         }
 
@@ -34,7 +36,9 @@ namespace SaltTechStore.Repositories.Implementation
                         select new ProductDto()
                         {
                             Id = p.Id,
-                            Name = p.Name
+                            Name = p.Name,
+                            ImageSource = p.ImageSource,
+                            price = p.price
                         }).FirstOrDefault();
 
             return product;

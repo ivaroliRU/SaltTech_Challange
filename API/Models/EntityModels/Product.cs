@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SaltTechStore.Models.EntityModels
 {
+    [Table("products")]
     public class Product
     {
         public int Id {get; set;}

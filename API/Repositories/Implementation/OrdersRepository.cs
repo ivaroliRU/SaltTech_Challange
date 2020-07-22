@@ -11,9 +11,9 @@ namespace SaltTechStore.Repositories.Implementation
 {
     public class OrdersRepository: IOrdersRepository
     {
-        private readonly IDBContext dbContext;
+        private readonly DBContext dbContext;
 
-        public OrdersRepository(IDBContext dbContext)
+        public OrdersRepository(DBContext dbContext)
         {
             this.dbContext = dbContext;
         }

@@ -1,10 +1,11 @@
 using Xunit;
+using Moq;
+using Microsoft.EntityFrameworkCore;
 using SaltTechStore.Services.Implementation;
 using SaltTechStore.Repositories.Implementation;
-using SaltTechStore.Services.Interfaces;
-using SaltTechStore.Repositories.Interfaces;
 using SaltTechStore.Repositories.Data;
 using SaltTechStore.Models.DtoModels;
+using SaltTechStore.Models.EntityModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +13,46 @@ namespace SaltTechStore.Tests.Services
 {
     public class ProductServiceTests
     {
-        IProductsService productsService;
+        ProductsService productsService;
 
         public ProductServiceTests(){
+            //setup test data for the product service
+            var data = new List<Product>{
+                new Product{
+                    Id = 1,
+                    Name = "Test Product 1",
+                    ImageSource = "adsf",
+                    price = 1,
+                    stock = 1
+                },
+                new Product{
+                    Id = 2,
+                    Name = "Test Product 2",
+                    ImageSource = "adsf",
+                    price = 1,
+                    stock = 1
+                },
+                new Product{
+                    Id = 3,
+                    Name = "Test Product 3",
+                    ImageSource = "adsf",
+                    price = 1,
+                    stock = 1
+                }
+            }.AsQueryable();
+
+            //setup mock database
+            var mockSet = new Mock<DbSet<Product>>();
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<DBContext>();
+            mockContext.Setup(c => c.Products).Returns(mockSet.Object);
+
             //setting up env for testing (switching out real db context with the fake one)
-            IDBContext dbContext = new FakeDBContext();
-            IProductsRepository productRepository = new ProductsRepository(dbContext);
+            ProductsRepository productRepository = new ProductsRepository(mockContext.Object);
             productsService = new ProductsService(productRepository);
         }
 

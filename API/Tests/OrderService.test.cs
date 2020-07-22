@@ -1,10 +1,11 @@
 using Xunit;
+using Moq;
+using Microsoft.EntityFrameworkCore;
 using SaltTechStore.Services.Implementation;
 using SaltTechStore.Repositories.Implementation;
-using SaltTechStore.Services.Interfaces;
-using SaltTechStore.Repositories.Interfaces;
 using SaltTechStore.Repositories.Data;
 using SaltTechStore.Models.DtoModels;
+using SaltTechStore.Models.EntityModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +13,33 @@ namespace SaltTechStore.Tests.Services
 {
     public class OrderServiceTests
     {
-        IOrdersService ordersService;
+        OrdersService ordersService;
 
         public OrderServiceTests(){
+            //setup test data for orders service
+            var data = new List<Order>{
+                new Order{
+                    Id = 1,
+                    ProductId = 1
+                },
+                new Order{
+                    Id = 2,
+                    ProductId = 2
+                }
+            }.AsQueryable();
+
+            //setup mock database
+            var mockSet = new Mock<DbSet<Order>>();
+            mockSet.As<IQueryable<Order>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<DBContext>();
+            mockContext.Setup(c => c.Orders).Returns(mockSet.Object);
+
             //setting up env for testing (switching out real db context with the fake one)
-            IDBContext dbContext = new FakeDBContext();
-            IOrdersRepository ordersRepository = new OrdersRepository(dbContext);
+            OrdersRepository ordersRepository = new OrdersRepository(mockContext.Object);
             ordersService = new OrdersService(ordersRepository);
         }
 
