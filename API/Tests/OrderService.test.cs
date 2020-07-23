@@ -26,16 +26,20 @@ namespace SaltTechStore.Tests.Services
                     Id = 2,
                     ProductId = 2
                 }
-            }.AsQueryable();
+            };
 
-            //setup mock database
+            var queryable = data.AsQueryable();
+
             var mockSet = new Mock<DbSet<Order>>();
-            mockSet.As<IQueryable<Order>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Order>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Order>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Order>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<Order>>().Setup(m => m.Provider).Returns(queryable.Provider);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.Expression).Returns(queryable.Expression);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.ElementType).Returns(queryable.ElementType);
+            mockSet.As<IQueryable<Order>>().Setup(m => m.GetEnumerator()).Returns(() => queryable.GetEnumerator());
+            mockSet.Setup(d => d.Add(It.IsAny<Order>())).Callback<Order>((s) => data.Add(s));
 
-            var mockContext = new Mock<DBContext>();
+            var mockContext = new Mock<IDBContext>();
+            //mockContext.Setup(x => x.Products).Returns(dbSet.Object);
+
             mockContext.Setup(c => c.Orders).Returns(mockSet.Object);
 
             //setting up env for testing (switching out real db context with the fake one)

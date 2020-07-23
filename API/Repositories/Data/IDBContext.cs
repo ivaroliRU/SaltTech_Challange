@@ -10,7 +10,9 @@ namespace SaltTechStore.Repositories.Data
     public interface IDBContext : IDisposable
     {
         DbSet<Product> Products{get; set;}
-
         DbSet<Order> Orders{get; set;}
+
+        int SaveChanges();
+        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry Add (object entity);
     }
 }
