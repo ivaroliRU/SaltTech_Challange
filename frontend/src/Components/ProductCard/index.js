@@ -1,19 +1,38 @@
 import React from 'react';
-import './style.css'
+import './style.css';
+import { connect } from 'react-redux';
 
-function ProductCard({name, image, price}) {
-    image = image.replace("[","").replace("]","").replace("\"","").replace(" ","").split(",")[0];
+class ProductCard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
+    render() {
+        //let image = this.props.product.image.replace("[","").replace("]","").replace("\"","").replace(" ","").split(",")[0];
 
-    return (
-        <div className="card product-card">
-            <img className="card-img-top" src={"https://dummyimage.com/250/ffffff/000000"} alt="Card image cap" />
-            <div className="card-body">
-                <h6 className="card-title">{name}</h6>
-                <p className="card-text">{price} $</p>
-                <a href="#" className="btn btn-primary">Add to cart</a>
+        return (
+            <div className="card product-card">
+                <img className="card-img-top" src={"https://dummyimage.com/250/ffffff/000000"} alt="Card image cap" />
+                <div className="card-body">
+                    <h6 className="card-title">{this.props.product.name}</h6>
+                    <p className="card-text">{this.props.product.price} $</p>
+                    <a className="btn btn-primary" onClick={() => this.props.addToCart(this.props.product)}>Add to cart</a>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default ProductCard;
+function mapStateToProps(state){
+    return{
+        cart: state.cart
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart: (item) => dispatch({type: 'ADD_TO_CART', payload:item})
+    };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProductCard);

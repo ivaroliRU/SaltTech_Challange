@@ -40,19 +40,19 @@ class Pagination extends React.Component {
             <nav aria-label="..." className="product-page-controller">
                 <ul className="pagination">
                     <li className={(this.props.page === 0)?"page-item disabled": "page-item"}>
-                    <a className="page-link" tabindex="-1" onClick={() => (this.props.page > 0)?this.props.changePage(this.props.page-1):null}>Previous</a>
+                    <a className="page-link" onClick={() => (this.props.page > 0)?this.props.changePage(this.props.page-1):null}>Previous</a>
                     </li>
                     {domain.map(i => {
                         if(this.props.page === i){
                             return (
-                                <li className="page-item active">
+                                <li className="page-item active" key={"pagination-"+i}>
                                     <a className="page-link">{i} <span className="sr-only">(current)</span></a>
                                 </li>
                             );
                         }
                         else{
                             return (
-                                <li className="page-item"><a className="page-link" onClick={() => this.props.changePage(i)}>{i}</a></li>
+                                <li className="page-item" key={"pagination-"+i}><a className="page-link" onClick={() => this.props.changePage(i)}>{i}</a></li>
                             );
                         }
                     })}

@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 const ProductRow = ({products}) => (
     <div className="row product-row">
         {products.map(p => (
-            <div className="col-3" key={"product-"+p.id}>
-                <ProductCard name={p.name} image={p.imageSource} price={p.price} />
+            <div className="col-md-3" key={"product-"+p.id}>
+                <ProductCard product={p}/>
             </div>
         ))}
     </div>
@@ -26,7 +26,9 @@ class ArtistModal extends React.Component {
 
         this.state = {
             data: [],
-            prev_page: 0
+            prev_page: 0,
+            prev_search: "",
+            loading: false
         };
     }
 
@@ -34,17 +36,30 @@ class ArtistModal extends React.Component {
         FetchProducts("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => {this.setState({data: res})});
     }
 
+    //handle getting new data
     handleChange(){
-        if(this.props.page === this.state.prev_page){
+        if(this.state.loading || (this.props.page === this.state.prev_page && this.props.search === this.state.prev_search)){
             return;
         }
 
-        FetchProducts("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => {this.setState({data: res, prev_page: this.props.page})});
+        //this.setState({loading: true});
+
+        //set a timeout for 100ms to make sure state transiton is done when the new data arrives...
+        FetchProducts(this.props.search, this.props.page, NUM_PRODUCTS_ON_PAGE)
+            .then(res => {this.setState(
+                {
+                    data: res, prev_page: this.props.page, 
+                    prev_search: this.props.search, 
+                    loading: false
+                })
+            });
+    }
+
+    componentDidUpdate(){
+        this.handleChange();
     }
 
     render() {
-        this.handleChange();
-        
         return (
             <div className="products-container">
                 {
@@ -60,6 +75,7 @@ class ArtistModal extends React.Component {
 function mapStateToProps(state){
     return{
         page: state.page,
+        search: state.search
     };
 }
 

@@ -1,6 +1,6 @@
 .header{
     text-align: center;
-    height: 200px;
+    height: 100px;
     background-color: tomato;
     color: white;
 }
@@ -9,7 +9,6 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    margin-top: 0px;
+    margin-top: 90px;
     margin-bottom: 0px;
-    line-height: 200px;
 }
