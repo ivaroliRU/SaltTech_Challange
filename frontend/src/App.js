@@ -1,15 +1,13 @@
 import React from 'react';
-import Navbar from './Components/Navbar';
-import Header from './Components/Header';
-import ProductsContainer from './Components/ProductsContainer';
+import { Provider } from 'react-redux';
+import store from './store'
+import AppContainer from './AppContainer';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Header />
-      <ProductsContainer />
-    </div>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
   );
 }
 

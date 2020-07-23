@@ -3,13 +3,13 @@
 const BASE_URL = "http://localhost:5000"
 
 //fetch products from our API with a search string
-export function FetchProducts(searchString){
+export function FetchProducts(searchString, page, page_size){
     return new Promise(resolve => {
 
-        let url = `${BASE_URL}/api/products`;
+        let url = `${BASE_URL}/api/products?page=${page}&page_size=${page_size}`;
 
-        if(searchString != ""){
-            url = `${url}?name=${searchString}`;
+        if(searchString !== ""){
+            url = `${url}&name=${searchString}`;
         }
 
         fetch(url)
@@ -23,7 +23,6 @@ export function FetchProducts(searchString){
                 }
             })
             .then(json => {
-                console.log(json);
                 resolve(json)
             });
     });

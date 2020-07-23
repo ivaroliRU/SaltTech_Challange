@@ -1,0 +1,9 @@
+.product-page-controller{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.page-link:hover{
+    cursor: pointer;
+}
