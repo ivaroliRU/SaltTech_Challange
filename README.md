@@ -31,7 +31,7 @@ npm install && npm start
 ## API Reference
 
 **Contact information:**  
-ivartheoli@ru.is  
+ivartheoli@gmail.com  
 
 ### /products
 

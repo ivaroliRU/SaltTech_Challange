@@ -61,9 +61,9 @@ ivartheoli@ru.is
 #### GET
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Success | [ [Order](#order) ] |
 
 #### POST
 ##### Parameters
