@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using SaltTechStore.Services.Interfaces;
 using SaltTechStore.Models.DtoModels;
 using SaltTechStore.Models.InputModels;
+using Microsoft.AspNetCore.Cors;
 
 namespace SaltTechStore.Controllers
 {
+    //[EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase

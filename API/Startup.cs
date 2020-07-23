@@ -44,6 +44,10 @@ namespace API
             
             //allow us to use interface over the dbcontext
             services.AddScoped<IDBContext, DBContext>();
+
+            //allow fetching from localhost
+            services.AddCors();
+                                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +63,20 @@ namespace API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
+
+            //remove https redirect, cause self signed certs not okey for chrome
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //app.UseCors("MyPolicy");
 
             app.UseRouting();
 
