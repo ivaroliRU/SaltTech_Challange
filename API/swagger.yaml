@@ -1,0 +1,133 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Auth Service"
+  contact:
+    email: "ivartheoli@ru.is"
+host: "127.0.0.1"
+basePath: "/api"
+tags:
+- name: "Products"
+  description: "Manages products in the system"
+- name: "Orders"
+description: "Manages orders in the system"
+schemes:
+- "http"
+definitions:
+  Order:
+    properties:
+      id:
+        type: integer
+      productId:
+        type: integer
+    required:  
+      - productId
+  Product:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      imageSource:
+        type: string
+      price:
+        type: integer
+      stock:
+        type: integer
+    required:  
+      - id
+      - name
+paths:
+  /products:
+    get:
+      tags:
+       - "Products"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+          description: "Success"
+  /products/{productId}:
+    get:
+      tags:
+       - "Products"
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: '#/definitions/Product'
+        404:
+          description: "Not Found"
+  /products/{productId}/orders:
+    get:
+      tags:
+       - "Products"
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: "Success"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+        404:
+          description: "Not Found"
+    post:
+      tags:
+       - "Products"
+      parameters:
+        - in: path
+          name: productId
+          type: integer
+          required: true
+      produces:
+      - "application/json"
+      responses:
+        204:
+          description: "Success - No Content"
+        404:
+          description: "Not Found"
+  /orders:
+    get:
+      tags:
+       - "Orders"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Success"
+    post:
+      tags:
+       - "Orders"
+      parameters:
+        - in: body
+          name: order
+          description: The order to create.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+      produces:
+      - "application/json"
+      responses:
+        204:
+          description: "Success - No Content"
+        400:
+          description: ""
