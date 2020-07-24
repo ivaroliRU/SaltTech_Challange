@@ -10,7 +10,7 @@ For the database I chose to use MySQL hosted on a small "droplet" that I was alr
 My solutions to this challenge was developed using the VS Code IDE on a Linux (Ubuntu) machine.
 
 ## Depenencies
- - .Net Core (Version 3.0^)
+ - .Net Core (Version 16.13.1^)
  - ReactJS (Version 3.0^)
 ## Deployment
 To run unit tests on the API: 
