@@ -17,7 +17,7 @@ namespace SaltTechStore.Services.Implementation
             this.ordersRepository = ordersRepository;
         }
 
-        //get all orders in the system
+        //get all products in the system, split up in pages of n size
         public IEnumerable<OrderDto> GetAllOrders(int page, int pageSize){
             List<OrderDto> orders = this.ordersRepository.GetAllOrders().ToList();
             List<OrderDto> result = new List<OrderDto>();

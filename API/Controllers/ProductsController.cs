@@ -15,8 +15,7 @@ namespace SaltTechStore.Controllers
     {
         private readonly IProductsService productsService;
 
-        public ProductsController(IProductsService productsService)
-        {
+        public ProductsController(IProductsService productsService){
             this.productsService = productsService;
         }
 
@@ -25,16 +24,14 @@ namespace SaltTechStore.Controllers
         [HttpGet("")]
         public ActionResult<IEnumerable<ProductDto>> GetAllProducts([FromQuery(Name = "page")] int page = 0, 
                                                                     [FromQuery(Name = "page_size")] int pageSize = 10,
-                                                                    [FromQuery(Name = "name")] string name = "")
-        {
+                                                                    [FromQuery(Name = "name")] string name = ""){
             return Ok(this.productsService.GetAllProducts(page, pageSize, name));
         }
 
         // GET api/products/{productId}
         // Returns profduct from the system given an id
         [HttpGet("{productId}")]
-        public ActionResult<ProductDto> GetProduct(int productId)
-        {
+        public ActionResult<ProductDto> GetProduct(int productId){
             var product =  this.productsService.GetProduct(productId);
 
             if(product == null){
@@ -48,8 +45,7 @@ namespace SaltTechStore.Controllers
         // GET api/products/{productId}/orders
         // Returns returns orders for a product given a product ID
         [HttpGet("{productId}/orders")]
-        public ActionResult<OrderDto> GetProductOrders(int productId)
-        {
+        public ActionResult<OrderDto> GetProductOrders(int productId){
             var orders = productsService.GetProductOrders(productId);
 
             if(orders == null){
@@ -63,8 +59,7 @@ namespace SaltTechStore.Controllers
         // Post api/products/{productId}/orders
         // Creates an order for a product given a product ID
         [HttpPost("{productId}/orders")]
-        public ActionResult<OrderDto> CreateOrder(int productId)
-        {
+        public ActionResult<OrderDto> CreateOrder(int productId){
             var result = productsService.CreateOrder(productId);
 
             if(!result){

@@ -16,7 +16,7 @@ namespace SaltTechStore.Services.Implementation
             this.productsRepository = productsRepository;
         }
 
-        //get all products in the system
+        //get all products in the system, split up in pages of n size
         public IEnumerable<ProductDto> GetAllProducts(int page, int pageSize, string name){
             List<ProductDto> products = this.productsRepository.GetAllProducts(name).ToList();
             List<ProductDto> result = new List<ProductDto>();
