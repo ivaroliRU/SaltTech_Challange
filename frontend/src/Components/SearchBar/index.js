@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
-import { fetchProducts } from '../../Services/productService';
+import { fetchProductsFromAPI } from '../../Services/productService';
 
 const SEARCH_SIZE = 4;
 
@@ -36,7 +36,7 @@ class SearchBar extends React.Component {
         });
     }
 
-    //handle search bar function
+    //handle fetching products for suggestions
     handleSearch(e) {
         let value = e.target.value;
 
@@ -45,11 +45,12 @@ class SearchBar extends React.Component {
             return;
         }
 
-        fetchProducts(value, 0, SEARCH_SIZE).then(res => {
+        fetchProductsFromAPI(value, 0, SEARCH_SIZE).then(res => {
             this.setState({ data: res });
         });
     }
 
+    //reset the search bar and suggestion box
     handleCompleteSearch(name) {
         this.props.changeSearch(name);
         this.setState({ data: [] });

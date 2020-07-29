@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = `http://${process.env.REACT_APP_API_LOCATION}:${process.env.REACT_APP_API_PORT}`;
 
 //fetch products from our API with a search string
-export function fetchProducts(searchString, page, page_size) {
+export function fetchProductsFromAPI(searchString, page, page_size) {
     return new Promise(resolve => {
 
         let url = `${BASE_URL}/api/products?page=${page}&page_size=${page_size}`;

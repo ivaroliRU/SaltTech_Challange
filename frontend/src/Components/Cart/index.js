@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 const CartContainer = ({ items, remove, clear }) => (
     <ul className="cart-container">
         {items.map((i, index) => (
-            <li className="cart-item"><FaTimes color="red" onClick={() => remove(index)} />{i.name}</li>
+            <li className="cart-item" key={"cart-item-"+index}><FaTimes color="red" onClick={() => remove(index)} />{i.name}</li>
         ))}
         <li className="divider"></li>
         <div className="row cart-options">

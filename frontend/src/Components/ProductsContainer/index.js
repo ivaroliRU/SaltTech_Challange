@@ -1,4 +1,4 @@
-import { fetchProducts } from '../../Services/productService';
+import { fetchProductsFromAPI } from '../../Services/productService';
 import React from 'react';
 import './style.css'
 import ProductCard from '../ProductCard';
@@ -33,7 +33,7 @@ class ArtistModal extends React.Component {
     }
 
     componentDidMount() {
-        fetchProducts("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => { this.setState({ data: res }) });
+        fetchProductsFromAPI("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => { this.setState({ data: res }) });
     }
 
     //handle fetching new data from the api
@@ -43,7 +43,7 @@ class ArtistModal extends React.Component {
         }
 
         //set a timeout for 100ms to make sure state transiton is done when the new data arrives...
-        fetchProducts(this.props.search, this.props.page, NUM_PRODUCTS_ON_PAGE)
+        fetchProductsFromAPI(this.props.search, this.props.page, NUM_PRODUCTS_ON_PAGE)
             .then(res => {
                 this.setState(
                     {
