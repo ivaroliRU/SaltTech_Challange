@@ -21,7 +21,7 @@ namespace SaltTechStore.Services.Implementation
             List<ProductDto> products = this.productsRepository.GetAllProducts(name).ToList();
             List<ProductDto> result = new List<ProductDto>();
 
-            for(int i = page*pageSize; i < products.Count() && i < (page+1)*pageSize; i++){
+            for(int i = page*pageSize; i < products.Count() && i < (page+1)*pageSize && i >= 0; i++){
                 result.Add(products.ElementAt(i));
             }
 

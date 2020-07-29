@@ -22,7 +22,7 @@ namespace SaltTechStore.Services.Implementation
             List<OrderDto> orders = this.ordersRepository.GetAllOrders().ToList();
             List<OrderDto> result = new List<OrderDto>();
 
-            for(int i = page*pageSize; i < orders.Count() && i < (page+1)*pageSize; i++){
+            for(int i = page*pageSize; i < orders.Count() && i < (page+1)*pageSize && i >= 0; i++){
                 result.Add(orders.ElementAt(i));
             }
 
