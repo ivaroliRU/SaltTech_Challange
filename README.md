@@ -130,3 +130,67 @@ ivartheoli@gmail.com
 | imageSource | string |  | No |
 | price | integer |  | No |
 | stock | integer |  | No |
+
+## Style Guide
+### ReactJS / Javascript
+#### Functions
+All functions should follow the camelCase naming convention and have the opening bracket in the same line. Functions should also have descriptive names. Example shown below.
+```javascript
+function fetchDataFromAPI(){
+    ///...
+}
+```
+
+#### Classes/Components
+Classes and react components should follow the PascalCase naming convention and also have the opening brackets in the same line.
+```javascript
+class Cart extends React.Component {
+    ///...
+}
+```
+
+"Dumb" components can be defined with functions instead of classes but are subject to the same style guides as the classes
+
+```javascript
+function Cart() {
+    ///...
+}
+```
+
+#### Variables
+All variables should follow the camelCase naming convention and should also have descriptive names. 
+
+```javascript
+let responseFromApi = 0;
+var responseFromApi = 0;
+```
+
+### C#
+#### Functions
+private functions should follow the camelCase naming convention and have the opening bracket in the same line. Public functions should follow the PascalCase naming convention.
+```c#
+private void privateFunction(){
+    ///...
+}
+
+public void PublicFunction(){
+    ///...
+}
+```
+
+#### Classes/Components
+Classes should follow the PascalCase naming convention and also have the opening brackets in a new line.
+```c#
+public class ProductController 
+{
+    ///...
+}
+```
+
+#### Variables
+Public variables should follow the PascalCase nameing convention but private ones should follow camelCase.
+
+```c#
+private int numberOfItems = 0;
+public int NumberOfItems = 0;
+```

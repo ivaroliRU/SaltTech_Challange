@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: "Auth Service"
+  title: "Ecommerce API"
   contact:
-    email: "ivartheoli@ru.is"
+    email: "ivartheoli@gmail.com"
 host: "127.0.0.1"
 basePath: "/api"
 tags:
