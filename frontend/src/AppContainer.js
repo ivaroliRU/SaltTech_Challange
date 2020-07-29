@@ -6,15 +6,15 @@ import ProductsContainer from './Components/ProductsContainer';
 import SearchBar from './Components/SearchBar';
 
 function AppContainer() {
-  return (
-    <div className="App">
-        <Navbar />
-        <Header />
-        <SearchBar />
-        <ProductsContainer />
-        <Pagination />
-      </div>
-  );
+    return (
+        <div className="App">
+            <Navbar />
+            <Header />
+            <SearchBar />
+            <ProductsContainer />
+            <Pagination />
+        </div>
+    );
 }
 
 export default AppContainer;

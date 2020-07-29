@@ -6,10 +6,8 @@ class ProductCard extends React.Component {
     constructor(props) {
         super(props);
     }
-    
-    render() {
-        //let image = this.props.product.image.replace("[","").replace("]","").replace("\"","").replace(" ","").split(",")[0];
 
+    render() {
         return (
             <div className="card product-card">
                 <img className="card-img-top" src={"https://dummyimage.com/250/ffffff/000000"} alt="Card image cap" />
@@ -23,16 +21,16 @@ class ProductCard extends React.Component {
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         cart: state.cart
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (item) => dispatch({type: 'ADD_TO_CART', payload:item})
+        addToCart: (item) => dispatch({ type: 'ADD_TO_CART', payload: item })
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

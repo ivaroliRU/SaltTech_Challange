@@ -1,14 +1,12 @@
-//const fetch = require('node-fetch');
-
 const BASE_URL = "http://localhost:5000"
 
 //fetch products from our API with a search string
-export function FetchProducts(searchString, page, page_size){
+export function fetchProducts(searchString, page, page_size) {
     return new Promise(resolve => {
 
         let url = `${BASE_URL}/api/products?page=${page}&page_size=${page_size}`;
 
-        if(searchString !== ""){
+        if (searchString !== "") {
             url = `${url}&name=${searchString}`;
         }
 

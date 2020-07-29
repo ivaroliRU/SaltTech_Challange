@@ -4,11 +4,11 @@ import store from './store'
 import AppContainer from './AppContainer';
 
 function App() {
-  return (
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    );
 }
 
 export default App;

@@ -1,15 +1,15 @@
-import { FetchProducts } from '../../Services/productService';
+import { fetchProducts } from '../../Services/productService';
 import React from 'react';
 import './style.css'
 import ProductCard from '../ProductCard';
 import { connect } from 'react-redux';
 
 //a single row of 4 products
-const ProductRow = ({products}) => (
+const ProductRow = ({ products }) => (
     <div className="row product-row">
         {products.map(p => (
-            <div className="col-md-3" key={"product-"+p.id}>
-                <ProductCard product={p}/>
+            <div className="col-md-3" key={"product-" + p.id}>
+                <ProductCard product={p} />
             </div>
         ))}
     </div>
@@ -32,30 +32,29 @@ class ArtistModal extends React.Component {
         };
     }
 
-    componentDidMount(){
-        FetchProducts("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => {this.setState({data: res})});
+    componentDidMount() {
+        fetchProducts("", this.props.page, NUM_PRODUCTS_ON_PAGE).then(res => { this.setState({ data: res }) });
     }
 
-    //handle getting new data
-    handleChange(){
-        if(this.state.loading || (this.props.page === this.state.prev_page && this.props.search === this.state.prev_search)){
+    //handle fetching new data from the api
+    handleChange() {
+        if (this.state.loading || (this.props.page === this.state.prev_page && this.props.search === this.state.prev_search)) {
             return;
         }
 
-        //this.setState({loading: true});
-
         //set a timeout for 100ms to make sure state transiton is done when the new data arrives...
-        FetchProducts(this.props.search, this.props.page, NUM_PRODUCTS_ON_PAGE)
-            .then(res => {this.setState(
-                {
-                    data: res, prev_page: this.props.page, 
-                    prev_search: this.props.search, 
-                    loading: false
-                })
+        fetchProducts(this.props.search, this.props.page, NUM_PRODUCTS_ON_PAGE)
+            .then(res => {
+                this.setState(
+                    {
+                        data: res, prev_page: this.props.page,
+                        prev_search: this.props.search,
+                        loading: false
+                    })
             });
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.handleChange();
     }
 
@@ -64,7 +63,7 @@ class ArtistModal extends React.Component {
             <div className="products-container">
                 {
                     this.state.data.chunk(4).map((l, i) => (
-                        <ProductRow key={"product-row-"+i} products={l} />
+                        <ProductRow key={"product-row-" + i} products={l} />
                     ))
                 }
             </div>
@@ -72,8 +71,8 @@ class ArtistModal extends React.Component {
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         page: state.page,
         search: state.search
     };
