@@ -2,19 +2,20 @@ import React from 'react';
 import './style.css';
 import Cart from '../Cart';
 import logo from '../../Assets/logo.png';
+import {Wrapper, Brand, ItemList} from '../Shared/Navbar';
 
 class Navbar extends React.Component {
     render() {
         return (
-            <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">
+            <Wrapper>
+                <Brand>
                     <img src={logo} width="100" alt="" />
-                </a>
+                </Brand>
 
-                <ul className="navbar-nav ml-auto">
+                <ItemList rightAlign>
                     <Cart />
-                </ul>
-            </nav>
+                </ItemList>
+            </Wrapper>
         );
     }
 }

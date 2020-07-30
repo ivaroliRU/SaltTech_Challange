@@ -3,16 +3,18 @@ import React from 'react';
 import './style.css'
 import ProductCard from '../ProductCard';
 import { connect } from 'react-redux';
+import {Row, Cell} from '../Shared';
+import ProductContainerWrapper from './ProductContainerWrapper';
 
 //a single row of 4 products
 const ProductRow = ({ products }) => (
-    <div className="row product-row">
+    <Row>
         {products.map(p => (
-            <div className="col-md-3" key={"product-" + p.id}>
+            <Cell key={"product-" + p.id}>
                 <ProductCard product={p} />
-            </div>
+            </Cell>
         ))}
-    </div>
+    </Row>
 );
 
 //number of products on a page
@@ -60,13 +62,13 @@ class ArtistModal extends React.Component {
 
     render() {
         return (
-            <div className="products-container">
+            <ProductContainerWrapper>
                 {
                     this.state.data.chunk(4).map((l, i) => (
                         <ProductRow key={"product-row-" + i} products={l} />
                     ))
                 }
-            </div>
+            </ProductContainerWrapper>
         );
     }
 }
