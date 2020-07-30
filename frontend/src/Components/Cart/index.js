@@ -1,6 +1,5 @@
 import React from 'react';
-import './style.css';
-import { FaShoppingCart, FaTimes } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import {Item, Link} from '../Shared/Navbar';
 import {Badge} from '../Shared';
@@ -15,9 +14,7 @@ class Cart extends React.Component {
         };
     }
 
-    render() {
-        console.log(this.state.show_cart);
-        
+    render() {        
         return (
             <React.Fragment>
                 <Item>

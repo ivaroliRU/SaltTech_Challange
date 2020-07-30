@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 
 //define a function for arrays that chunks them inti n sizes
+/* eslint-disable no-extend-native */
 Object.defineProperty(Array.prototype, 'chunk', {
     value: function (chunkSize) {
         var temporal = [];
@@ -15,6 +16,7 @@ Object.defineProperty(Array.prototype, 'chunk', {
         return temporal;
     }
 });
+/* eslint-enable no-extend-native */
 
 ReactDOM.render(
     <React.StrictMode>

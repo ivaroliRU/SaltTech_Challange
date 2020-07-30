@@ -1,6 +1,5 @@
 import { fetchProductsFromAPI } from '../../Services/productService';
 import React from 'react';
-import './style.css'
 import ProductCard from '../ProductCard';
 import { connect } from 'react-redux';
 import {Row, Cell} from '../Shared';

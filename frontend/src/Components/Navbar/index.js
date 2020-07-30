@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.css';
 import Cart from '../Cart';
 import logo from '../../Assets/logo.png';
 import {Wrapper, Brand, ItemList} from '../Shared/Navbar';

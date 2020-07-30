@@ -1,13 +1,13 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import Wrapper from './Wrapper';
+import CartContainerWrapper from './CartContainerWrapper';
 import CartButton from './CartButton';
 import CartItem from './CartItem';
 import {Row, Cell, Divider} from '../../Shared';
 
 //container that holds the list of items in the cart
 export default ({ show, items, remove, clear }) => (
-    <Wrapper show={items.length > 0 && show}>
+    <CartContainerWrapper show={items.length > 0 && show}>
         {items.map((i, index) => (
             <CartItem key={"cart-item-"+index}><FaTimes color="red" onClick={() => remove(index)} />{i.name}</CartItem>
         ))}
@@ -20,5 +20,5 @@ export default ({ show, items, remove, clear }) => (
                 <CartButton>Checkout</CartButton>
             </Cell>
         </Row>
-    </Wrapper>
+    </CartContainerWrapper>
 );

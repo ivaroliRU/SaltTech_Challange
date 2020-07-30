@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './style.css';
+import PagiNationWrapper from './PaginationWrapper';
+import PaginationItem from './PaginationItem';
 
 const DOMAIN_SIZE = 5;
 
@@ -37,30 +38,18 @@ class Pagination extends React.Component {
         let domain = this.calculateDomain();
 
         return (
-            <nav aria-label="..." className="product-page-controller">
-                <ul className="pagination">
-                    <li className={(this.props.page === 0) ? "page-item disabled" : "page-item"}>
-                        <a className="page-link" onClick={() => (this.props.page > 0) ? this.props.changePage(this.props.page - 1) : null}>Previous</a>
-                    </li>
-                    {domain.map(i => {
-                        if (this.props.page === i) {
-                            return (
-                                <li className="page-item active" key={"pagination-" + i}>
-                                    <a className="page-link">{i} <span className="sr-only">(current)</span></a>
-                                </li>
-                            );
-                        }
-                        else {
-                            return (
-                                <li className="page-item" key={"pagination-" + i}><a className="page-link" onClick={() => this.props.changePage(i)}>{i}</a></li>
-                            );
-                        }
-                    })}
-                    <li className="page-item">
-                        <a className="page-link" onClick={() => this.props.changePage(this.props.page + 1)}>Next</a>
-                    </li>
-                </ul>
-            </nav>
+            <PagiNationWrapper>
+                    <PaginationItem disabled={this.props.page === 0} onClick={() => (this.props.page > 0) ? this.props.changePage(this.props.page - 1) : null}>
+                        Previous
+                    </PaginationItem>
+                    {domain.map(i => (
+                        <PaginationItem active={this.props.page === i} key={"pagination-" + i} onClick={() =>this.props.page !== i && this.props.changePage(i)}>
+                            {i}
+                        </PaginationItem>))}
+                    <PaginationItem onClick={() => this.props.changePage(this.props.page + 1)}>
+                        Next
+                    </PaginationItem>
+                </PagiNationWrapper>
         );
     }
 }

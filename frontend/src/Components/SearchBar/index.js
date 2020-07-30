@@ -1,20 +1,13 @@
 import React from 'react';
-import './style.css';
+import SearchbarWrapper from './SearchbarWrapper';
+import SearchbarAddon from './SearchbarAddon';
+import SearchbarInput from './SearchbarInput';
+import SearchSuggestions from './SearchSuggestions';
 import { connect } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { fetchProductsFromAPI } from '../../Services/productService';
 
 const SEARCH_SIZE = 4;
-
-const SearchSuggestions = ({ products, handleClick }) => (
-    <ul className="search-suggestions">
-        {products.map((p, i) => (
-            <li key={"suggestion-" + i} className="product-suggestion" onClick={() => handleClick(p.name)}>
-                {p.name}
-            </li>
-        ))}
-    </ul>
-);
 
 class SearchBar extends React.Component {
     constructor(props) {
@@ -40,7 +33,7 @@ class SearchBar extends React.Component {
     handleSearch(e) {
         let value = e.target.value;
 
-        if (value == "") {
+        if (value === "") {
             this.setState({ data: [] });
             return;
         }
@@ -59,13 +52,11 @@ class SearchBar extends React.Component {
 
     render() {
         return (
-            <div className="search-bar input-group">
-                <input onChange={this.handleSearch} autoComplete="off" type="text" id="searchbar-input" className="form-control" aria-label="Search for products" placeholder={(this.props.search == "") ? "Search for products" : this.props.search} />
-                <div className="input-group-append">
-                    <span className="input-group-text"><FaSearch /></span>
-                </div>
+            <SearchbarWrapper>
+                <SearchbarInput onChange={this.handleSearch} autoComplete="off" type="text" id="searchbar-input" aria-label="Search for products" placeholder={(this.props.search === "") ? "Search for products" : this.props.search} />
+                <SearchbarAddon><FaSearch /></SearchbarAddon>
                 <SearchSuggestions products={this.state.data} handleClick={(name) => this.handleCompleteSearch(name)} />
-            </div>
+            </SearchbarWrapper>
         );
     }
 }
