@@ -17,6 +17,7 @@ namespace SaltTechStore.Repositories.Implementation
             this.dbContext = dbContext;
         }
 
+        //returns all orders in the DB
         public IEnumerable<OrderDto> GetAllOrders(){
             return this.dbContext.Orders.Select(o => new OrderDto
             {
@@ -25,6 +26,7 @@ namespace SaltTechStore.Repositories.Implementation
             });
         }
 
+        //get order given an order ID
         public OrderDto GetOrder(int id){
             var orders = (from o in this.dbContext.Orders
                         where o.Id == id

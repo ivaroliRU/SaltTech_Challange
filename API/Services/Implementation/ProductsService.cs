@@ -28,17 +28,17 @@ namespace SaltTechStore.Services.Implementation
             return result;
         }
         
-        //get product from the system given an ID
+        //get order from the system given an ID
         public ProductDto GetProduct(int id){
             return this.productsRepository.GetProduct(id);
         }
 
-        //get all orders for a specific product
+        //get all orders for a specific product given the id of the product
         public IEnumerable<OrderDto> GetProductOrders(int id){
             return this.productsRepository.GetProductOrders(id);
         }
 
-        //create order for a specific product
+        //create order for a specific product given the id of the product
         public bool CreateOrder(int id){
             return this.productsRepository.CreateOrder(id);
         }
